@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -19,6 +19,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <div className="flex h-screen items-center justify-center bg-blue-600 text-white text-4xl">
+        ✅ Tailwind 3 + CRA v5 works!
+      </div>
     </div>
   );
 }
