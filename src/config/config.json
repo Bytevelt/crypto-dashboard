@@ -1,0 +1,8 @@
+{
+    "coinGeckoBaseUrl": "https://api.coingecko.com/api/v3",
+    "defaultTimeout": 10000,
+    "routes": {
+        "getCoinList": "/coins/list",
+        "getCoinDetails": "/coins/{id}"
+    }
+}
