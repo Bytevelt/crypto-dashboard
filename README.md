@@ -1,46 +1,80 @@
-# Getting Started with Create React App
+# 🪙 Crypto Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Un dashboard interactivo para consultar **precios, variaciones y datos del mercado de criptomonedas**, construido con **React + TypeScript**, **PrimeReact**, y **TailwindCSS**.
 
-## Available Scripts
+## ✨ Características
 
-In the project directory, you can run:
+✅ **Dropdown con las 10 principales criptomonedas** por capitalización de mercado  
+✅ **Datos generales**: nombre, símbolo, precio actual y variación en 24h  
+✅ **Gráfico de línea** con la evolución del precio de los últimos 7 días  
+✅ **Top 5 ganadores del mercado** en las últimas 24h  
+✅ **Diseño responsivo** y tema oscuro  
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🚀 Demo
 
-### `npm test`
+Puedes ver la aplicación desplegada aquí:  
+👉 [Crypto Dashboard en Vercel](https://crypto-dashboard-ivory-delta.vercel.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 📦 Tecnologías utilizadas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React + TypeScript**  
+- **PrimeReact** (UI Components & Charts)  
+- **TailwindCSS** (Estilos)  
+- **CoinGecko API** para datos de criptomonedas  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Instalación y ejecución local
 
-### `npm run eject`
+### 1️⃣ Clonar el repositorio
+```bash
+git clone https://github.com/TU_USUARIO/crypto-dashboard.git
+cd crypto-dashboard
+```
+### 2️⃣ Instalar dependencias
+```bash
+npm install
+```
+### 3️⃣ Crear archivo .env
+Necesitas una API key de CoinGecko.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Regístrate o inicia sesión en CoinGecko API Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Obtén tu API key gratuita
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Crea un archivo .env en la raíz del proyecto con este contenido:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+``` bash
+REACT_APP_COINGECKO_API_KEY=YOUR_API_KEY
+```
+⚠️ IMPORTANTE: Sin la API key, la aplicación no podrá cargar los datos.
 
-## Learn More
+### 4️⃣ Ejecutar en modo desarrollo
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Usa la CoinGecko API para obtener:
+
+Top 10 criptomonedas por capitalización
+
+Precio histórico de los últimos 7 días
+
+Top 5 ganadores en 24h
+
+👨‍💻 Autor
+
+Desarrollado por Roosevelt De La Garza (Bytevelt)
+
+Si te gusta este proyecto, ⭐ dale una estrella en GitHub para apoyar.
+
+📜 Licencia
+
+Este proyecto está bajo la licencia MIT. Puedes usarlo libremente con atribución.
+
+
+
+
