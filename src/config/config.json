@@ -1,8 +1,11 @@
 {
     "coinGeckoBaseUrl": "https://api.coingecko.com/api/v3",
     "defaultTimeout": 10000,
+    "preferredCurrency": "usd",
     "routes": {
         "getCoinList": "/coins/list",
-        "getCoinDetails": "/coins/{id}"
+        "getCoinDetails": "/coins/{id}",
+        "getCoinMarketData": "/coins/markets",
+        "getCoinHistory": "/coins/{id}/market_chart"
     }
 }
