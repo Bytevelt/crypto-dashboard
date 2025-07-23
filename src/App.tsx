@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { DataTable } from "primereact/datatable";
@@ -7,6 +7,7 @@ import { Column } from "primereact/column";
 import { InputSwitch } from "primereact/inputswitch";
 import { Chart } from "primereact/chart";
 import coinService from "./services/coinsService";
+import language from "./i18n/es.json";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -154,7 +155,7 @@ function App() {
     <div className="min-h-screen text-white p-4 flex flex-col gap-4">
       <header className="flex flex-wrap justify-between items-center">
         <h1 className="text-2xl font-bold text-black dark:text-white">
-          Crypto Dashboard
+          {language.global.title}
         </h1>
         <div className="flex gap-2 items-center">
           <span className="text-sm text-gray-900 dark:text-white font-medium">
@@ -168,7 +169,7 @@ function App() {
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <Card className=" border-none shadow-md">
           <h2 className="text-lg font-semibold mb-2">
-            Seleccionar criptomoneda
+            {language.global.selectCoinMessage}
           </h2>
           <Dropdown
             value={selectedCoin}
@@ -200,17 +201,17 @@ function App() {
                   <span>{option.name}</span>
                 </div>
               ) : (
-                <span>Elige una cripto</span>
+                <span>{language.global.selectCoinPlaceholder}</span>
               )
             }
           />
         </Card>
 
         <Card className=" border-none shadow-md lg:col-span-2">
-          <h2 className="text-lg font-semibold mb-2">Datos generales</h2>
+          <h2 className="text-lg font-semibold mb-2">{language.global.generalData}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
-              <p className="text-sm text-gray-400">Nombre</p>
+              <p className="text-sm text-gray-400">{language.global.coinName}</p>
               <div className="flex justify-center items-center gap-2">
                 {selectedCoin?.image && (
                   <img
@@ -226,12 +227,12 @@ function App() {
             </div>
 
             <div>
-              <p className="text-sm text-gray-400">Símbolo</p>
+              <p className="text-sm text-gray-400">{language.global.coinSymbol}</p>
               <p className="text-xl font-bold">{selectedCoin?.symbol || "-"}</p>
             </div>
 
             <div>
-              <p className="text-sm text-gray-400">Precio Actual</p>
+              <p className="text-sm text-gray-400">{language.global.coinPrice}</p>
               <p className="text-xl font-bold">
                 {selectedCoin?.current_price
                   ? `$${selectedCoin.current_price.toLocaleString("en-US", {
@@ -243,7 +244,7 @@ function App() {
             </div>
 
             <div>
-              <p className="text-sm text-gray-400">Variación 24h</p>
+              <p className="text-sm text-gray-400">{language.global.dayChange}</p>
               {selectedCoin?.price_change_percentage_24h !== undefined ? (
                 <p
                   className={`text-xl font-bold ${
@@ -265,25 +266,25 @@ function App() {
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <Card className=" rounded-lg p-4 shadow-md h-80 lg:col-span-2">
-          <h2 className="text-lg font-semibold mb-4">Precio últimos 7 días</h2>
+          <h2 className="text-lg font-semibold mb-4">{language.global.last7DaysChange}</h2>
           <div className="h-full">
             <Chart type="line" data={chartData} options={chartOptions} />
           </div>
         </Card>
 
         <Card className=" border-none shadow-md flex flex-col justify-center">
-          <h2 className="text-lg font-semibold mb-4">Más información</h2>
+          <h2 className="text-lg font-semibold mb-4">{language.global.moreInfoTitle}</h2>
 
           <div className="flex flex-col gap-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-400">Ranking global</span>
+              <span className="text-gray-400">{language.global.globalRankingMessage}</span>
               <span className="font-semibold">
                 {selectedCoin?.market_cap_rank || "-"}
               </span>
             </div>
 
             <div className="flex justify-between">
-              <span className="text-gray-400">Market Cap</span>
+              <span className="text-gray-400">{language.global.marketCap}</span>
               <span className="font-semibold">
                 {selectedCoin?.market_cap
                   ? `$${selectedCoin.market_cap.toLocaleString("en-US")}`
@@ -292,7 +293,7 @@ function App() {
             </div>
 
             <div className="flex justify-between">
-              <span className="text-gray-400">Volumen 24h</span>
+              <span className="text-gray-400">{language.global.volume24h}</span>
               <span className="font-semibold">
                 {selectedCoin?.total_volume
                   ? `$${selectedCoin.total_volume.toLocaleString("en-US")}`
@@ -301,7 +302,7 @@ function App() {
             </div>
 
             <div className="flex justify-between">
-              <span className="text-gray-400">Oferta circulante</span>
+              <span className="text-gray-400">{language.global.circulatingSupply}</span>
               <span className="font-semibold">
                 {selectedCoin?.circulating_supply
                   ? `${selectedCoin.circulating_supply.toLocaleString("en-US")}`
@@ -316,7 +317,7 @@ function App() {
         <section className=" rounded-lg p-4 shadow-md">
           <div className="flex justify-between items-center mb-4">
             <h2 className="font-bold text-black dark:text-white">
-              Top 5 Ganadores
+              {language.global.top5Gainers}
             </h2>
           </div>
           <DataTable

@@ -1,0 +1,19 @@
+{
+    "global" : {
+        "title": "Crypto Dashboard",
+        "selectCoinMessage": "Seleccionar criptomoneda",
+        "selectCoinPlaceholder": "Elige una cripto",
+        "generalData": "Datos generales",
+        "coinName": "Nombre",
+        "coinSymbol": "Símbolo",
+        "coinPrice": "Precio Actual",
+        "dayChange": "Variación 24h",
+        "last7DaysChange": "Precio últimos 7 días",
+        "moreInfoTitle": "Más información",
+        "globalRankingMessage": "Ranking global",
+        "marketCap": "Market Cap",
+        "volume24h": "Volumen 24h",
+        "circulatingSupply": "Circulating Supply",
+        "top5Gainers": "Top 5 ganadores"
+    }
+}
