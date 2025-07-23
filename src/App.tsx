@@ -4,17 +4,21 @@ import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { InputText } from "primereact/inputtext";
+import { InputSwitch } from "primereact/inputswitch";
 import { Chart } from "primereact/chart";
-import { Button } from "primereact/button";
 import coinService from "./services/coinsService";
 
 function App() {
-  const [searchValue, setSearchValue] = useState("");
+  const [isDark, setIsDark] = useState(true);
   const [topCoins, setTopCoins] = useState<any[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<any | null>(null);
   const [coinHistory, setCoinHistory] = useState<any>(null);
   const [topGainers, setTopGainers] = useState<any[]>([]);
+
+  const textColor = isDark ? "#fff" : "#000";
+  const gridColor = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
+  const borderLineColor = isDark ? "#4f46e5" : "#6366f1";
+  const bgLineColor = isDark ? "rgba(79,70,229,0.1)" : "rgba(99,102,241,0.1)";
 
   useEffect(() => {
     getTop10Coins();
@@ -26,6 +30,34 @@ function App() {
       getCoinHistory(selectedCoin.id);
     }
   }, [selectedCoin]);
+
+  useEffect(() => {
+    changeTheme(isDark);
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  }, [isDark]);
+
+  const changeTheme = (darkMode: boolean) => {
+    const themeLinkId = "primereact-theme";
+    let linkElement = document.getElementById(
+      themeLinkId
+    ) as HTMLLinkElement | null;
+
+    if (!linkElement) {
+      linkElement = document.createElement("link");
+      linkElement.id = themeLinkId;
+      linkElement.rel = "stylesheet";
+      document.head.appendChild(linkElement);
+    }
+
+    linkElement.href = darkMode
+      ? "https://unpkg.com/primereact/resources/themes/lara-dark-purple/theme.css"
+      : "https://unpkg.com/primereact/resources/themes/lara-light-purple/theme.css";
+  };
 
   const getTop10Coins = async () => {
     try {
@@ -68,8 +100,9 @@ function App() {
           coinHistory?.prices?.map(([_, price]: [number, number]) => price) ??
           [],
         fill: true,
-        borderColor: "#4f46e5",
-        backgroundColor: "rgba(79,70,229,0.1)",
+        borderColor: borderLineColor,
+        backgroundColor: bgLineColor,
+        tension: 0.3,
       },
     ],
   };
@@ -78,7 +111,11 @@ function App() {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { labels: { color: "#fff" } },
+      legend: {
+        labels: {
+          color: textColor,
+        },
+      },
       tooltip: {
         callbacks: {
           label: (context: any) => {
@@ -92,40 +129,44 @@ function App() {
       },
     },
     scales: {
-      x: { ticks: { color: "#fff" } },
+      x: {
+        ticks: { color: textColor },
+        grid: {
+          color: gridColor,
+        },
+      },
       y: {
         ticks: {
-          color: "#fff",
+          color: textColor,
           callback: (value: number) =>
             `$${value.toLocaleString("en-US", {
               maximumFractionDigits: 0,
             })}`,
+        },
+        grid: {
+          color: gridColor,
         },
       },
     },
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-4 flex flex-col gap-4">
+    <div className="min-h-screen text-white p-4 flex flex-col gap-4">
       <header className="flex flex-wrap justify-between items-center">
-        <h1 className="text-2xl font-bold">Crypto Dashboard</h1>
+        <h1 className="text-2xl font-bold text-black dark:text-white">
+          Crypto Dashboard
+        </h1>
         <div className="flex gap-2 items-center">
-          <InputText
-            placeholder="Buscar criptomoneda..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            className="p-inputtext-sm bg-gray-800 border-gray-700 text-white"
-          />
-          <Button
-            icon="pi pi-sun"
-            className="p-button-rounded p-button-secondary"
-            label="Cambiar tema"
-          />
+          <span className="text-sm text-gray-900 dark:text-white font-medium">
+            {isDark ? "🌙 Oscuro" : "☀️ Claro"}
+          </span>
+
+          <InputSwitch checked={isDark} onChange={(e) => setIsDark(e.value)} />
         </div>
       </header>
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <Card className="bg-gray-800 border-none shadow-md">
+        <Card className=" border-none shadow-md">
           <h2 className="text-lg font-semibold mb-2">
             Seleccionar criptomoneda
           </h2>
@@ -165,7 +206,7 @@ function App() {
           />
         </Card>
 
-        <Card className="bg-gray-800 border-none shadow-md lg:col-span-2">
+        <Card className=" border-none shadow-md lg:col-span-2">
           <h2 className="text-lg font-semibold mb-2">Datos generales</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
@@ -223,14 +264,14 @@ function App() {
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="bg-gray-800 rounded-lg p-4 shadow-md h-80 lg:col-span-2">
+        <Card className=" rounded-lg p-4 shadow-md h-80 lg:col-span-2">
           <h2 className="text-lg font-semibold mb-4">Precio últimos 7 días</h2>
           <div className="h-full">
             <Chart type="line" data={chartData} options={chartOptions} />
           </div>
-        </div>
+        </Card>
 
-        <Card className="bg-gray-800 border-none shadow-md flex flex-col justify-center">
+        <Card className=" border-none shadow-md flex flex-col justify-center">
           <h2 className="text-lg font-semibold mb-4">Más información</h2>
 
           <div className="flex flex-col gap-3 text-sm">
@@ -271,9 +312,11 @@ function App() {
         </Card>
       </section>
 
-      <section className="bg-gray-800 rounded-lg p-4 shadow-md">
+      <section className=" rounded-lg p-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Top 5 Ganadores</h2>
+          <h2 className="font-bold text-black dark:text-white">
+            Top 5 Ganadores
+          </h2>
         </div>
         <DataTable
           value={topGainers}
