@@ -312,67 +312,68 @@ function App() {
         </Card>
       </section>
 
-      <section className=" rounded-lg p-4 shadow-md">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="font-bold text-black dark:text-white">
-            Top 5 Ganadores
-          </h2>
-        </div>
-        <DataTable
-          value={topGainers}
-          paginator={false}
-          responsiveLayout="scroll"
-          className="p-datatable-sm"
-        >
-          <Column
-            header="Nombre"
-            body={(rowData) => (
-              <div className="flex items-center gap-2">
-                {rowData.image && (
-                  <img
-                    src={rowData.image}
-                    alt={rowData.name}
-                    className="w-6 h-6 rounded-full"
-                  />
-                )}
-                <span>{rowData.name}</span>
-              </div>
-            )}
-          />
-
-          <Column field="symbol" header="Símbolo" />
-          <Column
-            field="current_price"
-            header="Precio"
-            body={(rowData) => (
-              <span className="font-semibold">
-                $
-                {rowData.current_price.toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}{" "}
-                USD
-              </span>
-            )}
-          />
-          <Column
-            field="price_change_percentage_24h"
-            header="Cambio 24h"
-            body={(rowData) => (
-              <span
-                className={`font-semibold ${
-                  rowData.price_change_percentage_24h >= 0
-                    ? "text-green-400"
-                    : "text-red-400"
-                }`}
-              >
-                {rowData.price_change_percentage_24h >= 0 ? "+" : ""}
-                {rowData.price_change_percentage_24h.toFixed(2)}%
-              </span>
-            )}
-          />
-        </DataTable>
-      </section>
+      <Card className=" border-none shadow-md flex flex-col justify-center">
+        <section className=" rounded-lg p-4 shadow-md">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="font-bold text-black dark:text-white">
+              Top 5 Ganadores
+            </h2>
+          </div>
+          <DataTable
+            value={topGainers}
+            paginator={false}
+            responsiveLayout="scroll"
+            className="p-datatable-sm"
+          >
+            <Column
+              header="Nombre"
+              body={(rowData) => (
+                <div className="flex items-center gap-2">
+                  {rowData.image && (
+                    <img
+                      src={rowData.image}
+                      alt={rowData.name}
+                      className="w-6 h-6 rounded-full"
+                    />
+                  )}
+                  <span>{rowData.name}</span>
+                </div>
+              )}
+            />
+            <Column field="symbol" header="Símbolo" />
+            <Column
+              field="current_price"
+              header="Precio"
+              body={(rowData) => (
+                <span className="font-semibold">
+                  $
+                  {rowData.current_price.toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  USD
+                </span>
+              )}
+            />
+            <Column
+              field="price_change_percentage_24h"
+              header="Cambio 24h"
+              body={(rowData) => (
+                <span
+                  className={`font-semibold ${
+                    rowData.price_change_percentage_24h >= 0
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {rowData.price_change_percentage_24h >= 0 ? "+" : ""}
+                  {rowData.price_change_percentage_24h.toFixed(2)}%
+                </span>
+              )}
+            />
+          </DataTable>
+        </section>
+      </Card>
     </div>
   );
 }
